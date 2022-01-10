@@ -107,6 +107,9 @@ export class UserController {
         BodyDeserializationBitfield.JSONPayload
     )
     async handlePostLogin(req: RequestWithJWT, res: Response){
+
+        try{
+
         const requestData: {email: string, password: string, clientKey: string} = req.body
 
         if(requestData.email == null || requestData.password == null || requestData.clientKey == null){
@@ -141,6 +144,9 @@ export class UserController {
             res.status(400).send("Invalid data")
             return
         }
+    }catch(e){
+        res.status(400).send("Invalid data")
+    }
 
     }
 
