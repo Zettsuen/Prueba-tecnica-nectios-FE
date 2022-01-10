@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild" : "npm run build",
     "start": "node dist/main",
     "create-db": "npx prisma migrate dev --name init",
     "build": "tsc"
