@@ -5,6 +5,11 @@ import { dbCoordinator } from './dbCoordinator';
 const App = express()
 
 App.use((req, res, next) => {
+
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.setHeader("Access-Control-Allow-Methods", "*")
+
     res.on("finish", () => {
 
         console.log(`${req.method} ${req.url} ${req.ip}:
@@ -19,6 +24,7 @@ App.use((req, res, next) => {
     })
     next();
 });
+
 
 App.use((err: any, req: any, res: any, next: any) => {
     // Maybe log the error for later reference?
