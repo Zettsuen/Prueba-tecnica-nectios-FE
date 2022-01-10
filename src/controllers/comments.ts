@@ -40,7 +40,13 @@ export class CommentController {
             offset: requestData.offset,
             productID: productID,
             client_id: client.id
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send("Internal server error")
+            return;
+
         })
+
         res.send(result)
     }
 
@@ -78,7 +84,13 @@ export class CommentController {
             userID: parseInt(req.jwt.sub),
             productID: productID,
             client_id: client.id
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send("Internal server error")
+            return;
+
         })
+        
         res.send(result)
     }
    

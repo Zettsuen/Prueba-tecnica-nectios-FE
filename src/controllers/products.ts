@@ -28,6 +28,11 @@ export class ProductController {
             offset: requestData.offset,
             client_id: client.id,
             productKey: requestData.productKey
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send("Internal server error")
+            return;
+
         })
 
         res.json(result)
@@ -57,6 +62,11 @@ export class ProductController {
             name: requestData.name,
             description: requestData.description,
             price: requestData.price
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send("Internal server error")
+            return;
+
         })
 
         res.json(result)
