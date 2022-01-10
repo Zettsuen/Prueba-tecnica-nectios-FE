@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model clients {
+  id      Int      @id @default(autoincrement())
+  key String
+  name String
+  users users[]
+  products products[]
+  comments comments[]
+}
+
+model users {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  key String @unique
+  name    String?
+  surname String?
+  phone String?
+  password String
+  profilePhoto String @default("https://weddo-ecommerce.s3.eu-west-3.amazonaws.com/profilePhotos/1626447073678.jpg")
+  client_id Int
+  client_user clients @relation(fields: [client_id], references: [id])
+  comment_user comments[]
+  role ROLE
+}
+
+model products {
+  id Int @id @default(autoincrement())
+  key String @unique
+  name String
+  description String?
+  price Float
+  product_photo String @default("https://weddo-ecommerce.s3.eu-west-3.amazonaws.com/profilePhotos/1626447073678.jpg")
+  client_id Int
+  client_product clients @relation(fields: [client_id], references: [id])
+  product_comment comments[]
+}
+
+model comments {
+  id Int @id @default(autoincrement())
+  key String @unique
+  description String?
+  client_id Int
+  product_id Int
+  createdBy Int
+  client_comment clients @relation(fields: [client_id], references: [id])
+  client_product products @relation(fields: [product_id], references: [id])
+  client_users users @relation(fields: [createdBy], references: [id])
+}
+
+
+model addons {
+  id Int @id @default(autoincrement())
+  name String @unique
+}
+
+enum ROLE {
+  USER
+  ADMIN
+}
