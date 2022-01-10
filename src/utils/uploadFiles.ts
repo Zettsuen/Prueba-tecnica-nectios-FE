@@ -152,8 +152,8 @@ export async function uploadFiles(req: RequestWithJWT, res: Response, individual
 async function uploadToS3(file: any, url: any) {
 
     const s3 = new AWS.S3({
-        accessKeyId: process.env.AWS_ACCESS_KEY || "AKIA4SVBCLMV3E7WXTWX",
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "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"
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
     });
 
     let bucket = "weddo-ecommerce";
@@ -174,8 +174,8 @@ export function getVerifiedURLFromS3UsingKey(key: string): string {
     try {
 
         const s3 = new AWS.S3({
-            accessKeyId: process.env.AWS_ACCESS_KEY || "AKIA4SVBCLMV3E7WXTWX",
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "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",
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
             region: "eu-west-3",
             signatureVersion: "v4",
         });
