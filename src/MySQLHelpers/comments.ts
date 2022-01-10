@@ -17,7 +17,7 @@ export class CommentHelper {
         filter.orderBy.id = "desc"
 
         filter.include = {
-            client_product: true
+            client_users: true
         }
 
         const query = await this.#sqlDB.comments.findMany(filter)
@@ -26,7 +26,7 @@ export class CommentHelper {
             finalData.push({
                 key: row.key,
                 description: row.description,
-                createdBy: row.client_product
+                createdBy: row.client_users
             })
         }
         return [{ data: finalData, count: options.count ?? 15, offset: options.offset ?? 0 }]

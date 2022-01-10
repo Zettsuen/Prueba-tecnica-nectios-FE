@@ -26,7 +26,7 @@ export class UserController {
         const client = (await DB.clients.getClient({ clientKey: requestData.clientKey }))[0]
 
         const result = await DB.user.getUsers({
-            userID: requestData.userID,
+            userID: requestData.userID != null ? requestData.userID : parseInt(req.jwt.sub),
             email: requestData.email,
             count: requestData.count,
             offset: requestData.offset,
